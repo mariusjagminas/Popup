@@ -1,7 +1,7 @@
-function showPopup(params = {}) {
+function popup(params = {}) {
   let config = {
     text: params.text || "Link is inactive. This is a demo website",
-    color: params.color || "black",
+    color: params.color || "#000000",
     background: params.background || "#ffffff",
     displayTime: params.displayTime || 2500,
     selector: params.selector || 'a[href="#"]'
