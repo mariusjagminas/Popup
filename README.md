@@ -7,13 +7,13 @@ This script will show a popup whenever a user clicks on the inactive link.
 
 Add script to a website
 
-```
+```html
 <script src="path/to/popup.js"></script>
 ```
 
 To start just run a function
 
-```
+```javascript
 popup();
 ```
 
@@ -22,7 +22,7 @@ otherwise, default settings will be applied
 
 Example
 
-```
+```javascript
 const config = {
 
   text: 'Hello',  // Popup content
@@ -38,7 +38,7 @@ popup(config);
 
 Default settings
 
-```
+```javascript
   text: 'Link is inactive. This is a demo website',
   color: '#000000',
   background:  '#ffffff',
