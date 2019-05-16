@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <title>Popup</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background: rgb(224, 203, 203);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        font-family: sans-serif;
+      }
+
+      .title {
+        font-size: 50px;
+      }
+      .ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      .li {
+        margin: 15px;
+      }
+
+      .li__item {
+        background: black;
+        text-decoration: none;
+        font-size: 30px;
+        padding: 5px 20px;
+        color: #ffffff;
+      }
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+      }
+
+      .btn {
+        font-size: 20px;
+        margin: 20px 0;
+        padding: 5px;
+      }
+
+      .btn--red {
+        background: red;
+      }
+      .btn--green {
+        background: green;
+        color: white;
+      }
+      .btn--red {
+        background: red;
+      }
+
+      .github-link {
+        position: absolute;
+        bottom: 25px;
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+      }
+
+      .github-link__icon {
+        font-size: 20px;
+        padding: 5px;
+      }
+
+      .github-link__text {
+        font-size: 20px;
+      }
+    </style>
+    <h1 class="title">Popup</h1>
+    <ul class="ul">
+      <li class="li"><a href="#" class="li__item">Link</a></li>
+      <li class="li"><a href="#" class="li__item">Link</a></li>
+      <li class="li"><a href="#" class="li__item">Link</a></li>
+      <li class="li"><a href="#" class="li__item">Link</a></li>
+    </ul>
+    <div class="wrapper">
+      <button class="btn btn--red">Red button</button>
+      <button class="btn btn--green">Green Button</button>
+      <button class="btn btn--btn">Button</button>
+    </div>
+    <a href="https://github.com/mariusjagminas/Popup" class="github-link">
+      <i class="fab fa-github github-link__icon"></i>
+      <span class="github-link__text">mariusjagminas/Popup</span>
+    </a>
+
+    <script src="popup.min.js"></script>
+    <script>
+      const linkPopup = new Popup({ text: "This is a link tag" });
+      const RedButtonPopup = new Popup({
+        selector: ".btn--red",
+        background: "red",
+        text: "This is a a red button"
+      });
+      const GreenButtonPopup = new Popup({
+        selector: ".btn--green",
+        background: "green",
+        text: "This is a a green button",
+        color: "white"
+      });
+      const ButtonPopup = new Popup({
+        selector: ".btn--btn",
+        text: "This is button"
+      });
+      linkPopup.init();
+      RedButtonPopup.init();
+      GreenButtonPopup.init();
+      ButtonPopup.init();
+    </script>
+  </body>
+</html>
