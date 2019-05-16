@@ -1,49 +1,62 @@
-function popup(params = {}) {
-  let config = {
-    text: params.text || "Link is inactive. This is a demo website",
-    color: params.color || "#000000",
-    background: params.background || "#ffffff",
-    displayTime: params.displayTime || 2500,
-    selector: params.selector || 'a[href="#"]'
-  };
-
-  const body = document.querySelector("body");
-  body
-    .querySelectorAll(config.selector)
-    .forEach(link => link.addEventListener("click", handleClick));
-
-  function handleClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const { x, y, position } = getElementCoords(this);
-    addPopupToDom(x, y, position);
+class Popup {
+  constructor(params = {}) {
+    this.config = {
+      text: params.text || "Link is inactive. This is a demo website",
+      color: params.color || "#000000",
+      background: params.background || "#ffffff",
+      displayTime: params.displayTime || 2500,
+      selector: params.selector || 'a[href="#"]'
+    };
+    this.body = null;
+    this.links = null;
   }
 
-  function getElementCoords(element) {
+  init = () => {
+    this.body = document.querySelector("body");
+    this.links = this.body.querySelectorAll(this.config.selector);
+    this.links.forEach(link =>
+      link.addEventListener("click", this.handleClick)
+    );
+  };
+
+  stop = () => {
+    this.links.forEach(link =>
+      link.removeEventListener("click", this.handleClick)
+    );
+  };
+
+  handleClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const { x, y, position } = this.getElementCoords(e.target);
+    this.addPopupToDom(x, y, position);
+  };
+
+  getElementCoords = element => {
     const coords = element.getBoundingClientRect();
-    const isfixed = isFixed(element);
+    const isfixed = this.isFixed(element);
     return {
       x: coords.left + (isfixed ? 0 : window.scrollX) + coords.width / 2 - 30,
       y: coords.top + (isfixed ? 0 : window.scrollY) + coords.height / 2 + 10,
       position: isfixed ? "fixed" : "absolute"
     };
-  }
+  };
 
-  function isFixed(elem) {
+  isFixed = elem => {
     do {
       if (getComputedStyle(elem).position == "fixed") return true;
     } while ((elem = elem.offsetParent));
     return false;
-  }
+  };
 
-  function addPopupToDom(x, y, position) {
+  addPopupToDom = (x, y, position) => {
     const p = document.createElement("p");
     const div = document.createElement("div");
     const div2 = document.createElement("div");
 
     p.style.cssText = `
-      background: ${config.background}; 
-      color: ${config.color};
+      background: ${this.config.background}; 
+      color: ${this.config.color};
       position: ${position};
       padding: 20px; 
       top: ${y}px;
@@ -54,7 +67,7 @@ function popup(params = {}) {
       opacity: 0; 
       transition: 700ms
       `;
-    p.innerText = config.text;
+    p.innerText = this.config.text;
 
     div.style.cssText = `
       position: absolute;
@@ -63,7 +76,7 @@ function popup(params = {}) {
       transform: rotateZ(45deg);
       width: 20px;
       height: 20px;
-      background: ${config.background};
+      background: ${this.config.background};
       box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
     `;
 
@@ -73,24 +86,24 @@ function popup(params = {}) {
       left: 10px;
       width: 40px;
       height: 20px;
-      background: ${config.background};
+      background: ${this.config.background};
     `;
     p.appendChild(div);
     p.appendChild(div2);
-    body.appendChild(p);
+    this.body.appendChild(p);
 
     setTimeout(() => {
       p.style.opacity = "1";
     }, 10);
-    removePopupFromDom(p, config.displayTime);
-  }
+    this.removePopupFromDom(p, this.config.displayTime);
+  };
 
-  function removePopupFromDom(p, time) {
+  removePopupFromDom = (p, time) => {
     setTimeout(() => {
       p.style.opacity = "0";
     }, time);
     setTimeout(() => {
-      body.removeChild(p);
+      this.body.removeChild(p);
     }, time + 1000);
-  }
+  };
 }

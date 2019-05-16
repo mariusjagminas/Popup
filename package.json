@@ -1,0 +1,30 @@
+{
+  "name": "popup",
+  "version": "1.0.0",
+  "description": "popup script",
+  "main": "popup.js",
+  "scripts": {
+    "prebuild": "babel src -d lib",
+    "build": "uglifyjs lib/popup.js --compress -o popup.min.js  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariusjagminas/Popup.git"
+  },
+  "author": "Marius Jagminas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariusjagminas/Popup/issues"
+  },
+  "homepage": "https://github.com/mariusjagminas/Popup#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-classes": "^7.4.4",
+    "@babel/preset-env": "^7.4.4"
+  },
+  "dependencies": {
+    "uglify-js": "^3.5.12"
+  }
+}
